@@ -28,10 +28,16 @@ const footerLinks = {
     { text: '隐私', url: '#' }  
   ],  
   download: [  
-    { text: 'A', url: '#' },  
     { text: 'Android', url: '#' },  
     { text: 'iPhone', url: '#' },  
-    { text: 'Web', url: '#' }  
+    { text: 'Mac/PC', url: '#' },  
+    { text: 'whatsApp网页版', url: '#' }  
+  ]  ,
+  help: [  
+    { text: '联系我们', url: '#' },  
+    { text: '帮助中心', url: '#' },  
+    { text: '下载', url: '#' },  
+    { text: '安全声明', url: '#' }  
   ]  
 }  
 
@@ -183,7 +189,7 @@ const selectedLanguage = ref('zh')
              <div class="footer-section">  
             <h3>需要帮助？</h3>  
             <ul>  
-              <li v-for="link in footerLinks.download" :key="link.text">  
+              <li v-for="link in footerLinks.help" :key="link.text">  
                 <a :href="link.url">{{ link.text }}</a>  
               </li>  
             </ul>  
@@ -576,9 +582,11 @@ const selectedLanguage = ref('zh')
   height: 200px; /* Optional: Set a height for the div */  
 }  
 .footer-section h3 {  
-  font-size: 1.125rem;  
+  font-size: 13px;  
   font-weight: 600;  
   margin-bottom: 1.5rem;  
+  color: rgb(138, 144, 150);  
+
 }  
 
 .footer-section ul {  
@@ -591,7 +599,8 @@ const selectedLanguage = ref('zh')
 }  
 
 .footer-section a {  
-  color: #999;  
+  color: white;  
+  font-size: 19px;
   text-decoration: none;  
   transition: color 0.3s ease;  
 }  
