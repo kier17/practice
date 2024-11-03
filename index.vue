@@ -102,7 +102,9 @@ const selectedLanguage = ref('zh')
               <article>  
                 <h1>私密地收发消息</h1>  
                 <p>简单、可靠的免费*私密消息和通话体验，在世界各地均可享受。</p>  
-                <button class="download-button">下载</button>  
+                <div class="div-bt">
+                  <button class="download-button">下载</button>  
+                </div>
               </article>  
             </div>  
             <!-- 右边图片 -->  
@@ -110,15 +112,17 @@ const selectedLanguage = ref('zh')
               <!-- 五张图片 -->  
               <img src="src/assets/imgs/newImgs/what-article1-1.png" alt="Feature Image 1">  
               <img src="src/assets/imgs/newImgs/what-article1-2.png" alt="Feature Image 2">  
-              <img src="src/assets/imgs/newImgs/what-article1-3.png" alt="Feature Image 3">  
-              <img src="src/assets/imgs/newImgs/what-article1-4.png" alt="Feature Image 4">  
-              <img src="src/assets/imgs/newImgs/what-article1-5.png" alt="Feature Image 5">  
+              <div class="hidden-img">
+                <img src="src/assets/imgs/newImgs/what-article1-3.png" alt="Feature Image 3">  
+                <img src="src/assets/imgs/newImgs/what-article1-4.png" alt="Feature Image 4">  
+                <img src="src/assets/imgs/newImgs/what-article1-5.png" alt="Feature Image 5">  
+              </div>
             </div>  
           </div> 
         </div>  
         <p class="bottle-p">* 可能会产生流量费用。请联系您的运营商了解详情。</p> 
         <img class="chat-pic" src="src/assets/imgs/newImgs/what-article2-1.png" alt="">
-        <div>       
+        <div class="div-pic">       
            <h2 class="pic-h">借助私密消息和通话，您可以放心地表达自己，畅所欲言，跨越距离的阻碍，与最重要的人保持紧密联系。</h2>
         </div>
         <img class="chat-pic" src="src/assets/imgs/newImgs/what-article2-2.png" alt="">
@@ -127,7 +131,13 @@ const selectedLanguage = ref('zh')
         <div  
       v-for="(item, index) in articles"  
       :key="index"  
-      :class="['pic-article', { reverse: index % 2 !== 0 }]"  
+      :class="[
+    'pic-article', 
+    { 
+      'reverse': index % 2 !== 0,
+      'black-bg': item.title === '自由自在地交谈',
+
+    }]"  
     >  
       <div class="letter">  
         <h2>{{ item.title }}</h2>  
@@ -416,12 +426,11 @@ const selectedLanguage = ref('zh')
   padding: 32px;  
   background-image: url('src/assets/imgs/newImgs/what-article1.png');  
   width: 100%; /* Changed to percentage for responsiveness */  
-  max-width: 2000px; 
   aspect-ratio: calc(1158 / 752); /* Maintain aspect ratio */  
   height: 752px;
   margin: 0 auto;
   background-size: cover; /* 或者使用 contain */  
-  background-position: center;  
+  background-position: top center;  
   background-repeat: no-repeat;  
   border-radius: 20px; /* 设置圆角 */  
   overflow: hidden; /* 确保内容不溢出圆角 */  
@@ -432,14 +441,20 @@ const selectedLanguage = ref('zh')
 
 .feature-box {  
   display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+
+  max-width: 1080px;
   padding: 24px;  
   border-radius: 8px;  
   width: 100%;
-  margin: 0 100px;
+  margin: 0 auto;
+  height: 600px;
 }  
 
 .feature-content {  
-  flex: 1;  
+  display: flex;  
+  justify-content: space-between;  
   padding-right: 24px; 
   width: 360px; 
   line-height: 1;
@@ -454,7 +469,12 @@ const selectedLanguage = ref('zh')
   font-size: 19px;  
   margin-bottom: 24px;  
 }  
-
+.div-bt{
+  width: 322px;
+  height: 165px;
+  display: flex;
+  align-items: center;
+}
 
 .feature-image {  
   display: flex;  
@@ -467,6 +487,7 @@ const selectedLanguage = ref('zh')
   border-radius: 10px;  
   object-fit: cover;  
 }  
+
 .bottle-p{
   color: rgb(94, 94, 94);
   font-size: 13px;
@@ -479,17 +500,29 @@ const selectedLanguage = ref('zh')
 }
 .chat-pic{
     height: auto;
-    max-width: 100%;
-    width: auto;
+    max-width: 1363px;
+    margin: 0 auto;
     padding: 32px;
+}
+.div-pic {
+  width: 1080px;
+  height: 300px;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;    /* 垂直居中 */
+  margin:0 auto;
 }
 .pic-h{
   color: black;
   font-size: 49px;
+  font-family: Helvetica Neue, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: 400;
   text-align: center;
   width: 900px;
   height: 147px;
-  margin: 56px auto;
+  
+
+  /* margin: 56px auto; */
   line-height: 1; /* 设置行高为1，取消行间距 */  
 
 }
@@ -501,16 +534,63 @@ const selectedLanguage = ref('zh')
 .pic-article {  
   display: flex;  
   margin-bottom: 30px;  
+  flex-direction: row;  
+  justify-content: space-between; 
+  /* max-width: 1080px;  */
+  margin:  0 auto;
 }  
 
 .letter {  
   flex: 1;  
   padding: 20px;  
+  margin-right: 150px;
+  max-width: 430px;
 }  
+
+.reverse {  
+  flex-direction: row-reverse;  
+  
+  
+}  
+.black-bg{
+  background-color:black;
+  max-width: 100% !important;
+  width: 100% !important;
+  display: flex;
+
+    /* 如果你想保持内容宽度 */
+    > * {
+      max-width: 1080px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  .letter{
+    max-width: 430px;
+    margin: 0 auto;
+    flex: 1 ;
+    }
+  .pic{
+    flex: 1 ;
+
+  }
+  img{
+  max-width: 540px;
+  margin: 0 auto;
+
+  }
+  .letter h2,p,a{
+    color: rgb(216, 217, 218);
+    text-align: left;
+  }
+  .letter h2{
+    color: white;
+  }
+}
+
 .letter h2{
-  color: black;
+  color: rgb(26, 28, 30);
   font-size: 61px;
-  text-align: center;
+  text-align: left;
   width: 450px;
   margin: 56px auto;
   line-height: 1; /* 设置行高为1，取消行间距 */  
@@ -520,7 +600,6 @@ const selectedLanguage = ref('zh')
 .letter a{
   color: black;
   font-size: 17px;
-  margin: 40px 70.6px;
 
 }
 .letter p{
@@ -528,11 +607,12 @@ const selectedLanguage = ref('zh')
   font-size: 19px;
   line-height: 25px;
   font-weight: 400;
-  text-align: right;
-  margin: 0 70.6px;
+  text-align: left;
+  width: 450px;
 }
 .pic {  
   flex: 1;  
+  max-width: 540px
 }  
 
 .pic img {  
@@ -668,7 +748,140 @@ const selectedLanguage = ref('zh')
 }
 
 /* 响应式设计 */  
+@media (max-width: 768px) {  
+  .features-container {
+    padding: 32px !important; /* 使用 !important 确保覆盖其他可能的样式 */
+  
+  }
+  .feature-box{
+    flex-direction: column-reverse; /* Arrange items in a column */  
+    align-items: flex-start; /* 取消居中对齐 */
+    justify-content: flex-start;
+  }
+  .feature-content h1 {  
+  font-size: 45px;  
+}  
+
+.feature-content p {  
+  font-size: 17px;  
+}  
+.hidden-img{
+  display:none;
+}
+.div-pic{
+  /* margin:0; */
+  width: 100%;
+  padding-left: 20px;
+}
+.pic-h{
+    font-size: 25px;
+  }
+  .letter p{
+    font-size: 17px;
+  }
+  .letter h2{
+    font-size: 33px;
+    max-width: 100%;
+  }
+  .letter{
+    margin: 0;
+
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .pic-h{
+    font-size: 33px;
+  }
+  .letter h2{
+    font-size: 41px;
+
+  }
+  .letter p{
+    font-size: 17px;
+  }
+ 
+}
+@media (max-width: 1024px) {  
+  .pic-article{
+    flex-direction: column;  
+    margin: 0;
+
+  }
+  .letter { 
+    max-width: 100%;
+
+    /* margin-right: 0;
+    margin-left: 0;
+    width: 100%; */
+
+  }
+  .letter h2{
+    margin: 0;
+    width: 100%;
+  }
+  .letter p{
+    margin: 0;
+    width: 100%;
+    /* width: 100%; */
+  }
+  .letter a{
+    display: block;  /* 让 a 标签独占一行 */
+    text-align: left;
+    
+  }
+  .pic{
+    width: 100%;
+    margin: 0;
+  }
+  .pic img{
+    /* width: 332px;
+    height: 654px; */
+    margin-left: 50px;
+    width: 70%;
+    height: auto;
+  }
+  .footer-grid {  
+    flex-wrap: wrap; /* 允许元素换行 */
+    
+
+  }
+  .footer-section a {  
+    font-size: 17px;
+  }
+  .footer-section:first-child {
+      flex: 0 0 100%; /* 让第一个 section 占满宽度 */
+      /* margin-bottom: 30px; */
+      
+      .logo-des {
+        flex-direction: row;
+        justify-content: space-between;  
+
+        height: auto;
+        padding: 20px 100px;
+        
+        .footer-logo {
+          padding-top: 30px;
+          margin-bottom: 20px; /* 减小 logo 的底部间距 */
+          margin-left: 80px;
+        }
+        
+        button {
+          margin-left: 0; /* 移除按钮的左边距 */
+          width: 200px;
+        }
+      }
+    }
+    
+    .footer-section {
+      flex: 0 0 50%; /* 其他 section 每行显示两个 */
+      margin-bottom: 20px;
+    }
+}
 @media (min-width: 1200px) {  
+  .pic-h{
+    font-size: 49px;
+  }
+  
   .menu-button {  
     display: none;  
   }  
